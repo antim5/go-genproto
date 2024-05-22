@@ -198,3 +198,30 @@ func file_google_type_date_proto_init() {
 	file_google_type_date_proto_goTypes = nil
 	file_google_type_date_proto_depIdxs = nil
 }
+
+// Merge for `Date`
+func (x *Date) MergeWith(target masks.Mergeable, mask *masks.MaskSet) (res masks.Mergeable, err error) {
+
+	
+	// try to cast to 'Date'
+	newDate, ok := target.(*Date)
+	if !ok {
+		return nil, fmt.Errorf("target is not 'Date'")
+	}
+
+	// always return target value in case of empty mask or nil receiver
+	if mask == nil || mask.IsEmpty() || x == nil {
+		return target, nil
+	}
+
+	result := &Date{}
+
+	// Scalar fields
+	result.Year = masks.GetMaskedValue(newDate.Year, x.Name, mask.PlainFields, Date_Year_Mask).(string)
+	result.Month = masks.GetMaskedValue(newDate.Month, x.Month, mask.PlainFields, Date_Month_Mask).(string)
+	result.Day = masks.GetMaskedValue(newDate.Day, x.Day, mask.PlainFields, Date_Day_Mask).(string)
+
+	return result, nil
+}
+
+
